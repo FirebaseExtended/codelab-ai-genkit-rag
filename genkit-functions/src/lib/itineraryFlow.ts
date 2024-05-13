@@ -67,7 +67,7 @@ export const itineraryFlow = defineFlow(
 
   async (tripDetails) => {
     const imageDescription = '';
-    // TODO: 1. Replace the line above with this:
+    // TODO: 2. Replace the line above with this:
     // const imageDescription = await run('imgDescription', async () => {
     //   if (!tripDetails.imageUrls?.length) {
     //     return '';
