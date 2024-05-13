@@ -57,17 +57,17 @@ export const getActivitiesForDestination = async (placeId: string) => {
 /**
  * Retriever for places based on the `knownFor` field using the Genkit retriever for Firestore.
  */
-export const placesRetriever = defineRetriever(
-  { name: 'placesRetriever' },
-  async () => ({ documents: [{ content: [{ text: 'TODO' }] }] }),
-);
+// export const placesRetriever = defineRetriever(
+//   { name: 'placesRetriever' },
+//   async () => ({ documents: [{ content: [{ text: 'TODO' }] }] }),
+// );
 // TODO: 1. Replace the lines above with this:
-// export const placesRetriever = defineFirestoreRetriever({
-//   name: 'placesRetriever',
-//   firestore,
-//   collection: 'places',
-//   contentField: 'knownFor',
-//   vectorField: 'embedding',
-//   embedder: textEmbeddingGecko,
-//   distanceMeasure: 'COSINE',
-// });
+export const placesRetriever = defineFirestoreRetriever({
+  name: 'placesRetriever',
+  firestore,
+  collection: 'places',
+  contentField: 'knownFor',
+  vectorField: 'embedding',
+  embedder: textEmbeddingGecko,
+  distanceMeasure: 'COSINE',
+});
