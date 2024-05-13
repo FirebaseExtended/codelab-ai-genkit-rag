@@ -22,7 +22,7 @@ import { vertexAI } from '@genkit-ai/vertexai';
 // Your web app's Firebase configuration
 const firebaseConfig = {
   // ...
-  projectId: '...',
+  projectId: 'REPLACE_WITH_YOUR_PROJECT_ID',
   // ...
 };
 

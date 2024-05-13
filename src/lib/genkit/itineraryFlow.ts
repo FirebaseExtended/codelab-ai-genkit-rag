@@ -74,7 +74,7 @@ export const itineraryFlow = defineFlow(
   },
 
   async (tripDetails) => {
-    const imageDescription = await run('imgDescription', async () => {
+    const imgDescription = await run('imgDescription', async () => {
       if (!tripDetails.imageUrls?.length) {
         return '';
       }
@@ -87,11 +87,11 @@ export const itineraryFlow = defineFlow(
 
     const places = await run(
       'Retrieve matching places',
-      { imageDescription, request: tripDetails.request },
+      { imgDescription, request: tripDetails.request },
       async () => {
         const docs = await retrieve({
           retriever: placesRetriever,
-          query: `${tripDetails.request}\n${imageDescription}`,
+          query: `${tripDetails.request}\n${imgDescription}`,
           options: {
             limit: 3,
           },
