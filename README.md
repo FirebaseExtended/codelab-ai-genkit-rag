@@ -1,26 +1,31 @@
-# AI Extensions Codelab
+# Build gen AI features powered by your data with Firebase Genkit
 
-This is the codelab code for Gemini API extensions
+This is the code for [Build gen AI features powered by your data with Firebase Genkit](https://firebase.google.com/codelabs/ai-genkit-rag) codelab.
 
-## Source Code Headers
+## Getting Started
 
-Every file containing source code must include copyright and license
-information. This includes any JS/CSS files that you might be serving out to
-browsers. (This is to help well-intentioned people avoid accidental copying that
-doesn't comply with the license.)
+First, replace `src/lib/firebase.config.js` with your own Firebase web app configuration.
 
-Apache header:
+Then install the dependencies:
 
-    Copyright 2024 Google LLC
+```bash
+npm install
+```
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+Then (in terminal 1), run Genkit UI:
 
-        https://www.apache.org/licenses/LICENSE-2.0
+```bash
+npx genkit start
+```
 
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+(In terminal 2), run the Next.js development server:
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:4000](http://localhost:4000) with your browser to lauch Genkit UI.
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the Next.js app.
+
+You can start editing the app by modifying `genkit-functions/src/lib/itineraryFlow.ts`, `src/app/gemini/page.tsx`. The page auto-updates as you edit the file.

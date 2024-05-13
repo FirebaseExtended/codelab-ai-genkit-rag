@@ -1,0 +1,20 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Make sure to write security rules for your app before reusing codelab code
+    match /activities/{id} {
+      allow read: if true;
+    }
+    match /places/{id} {
+      allow read: if true;
+    }
+
+    match /flowTraceStore/{id} {
+      allow create: if true;
+    }
+    match /traceStore/{id} {
+      allow create: if true;
+    }
+  }
+}

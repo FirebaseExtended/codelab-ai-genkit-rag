@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "genkit-edfbc"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}

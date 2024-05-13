@@ -1,0 +1,8 @@
+---
+model: vertexai/gemini-1.0-pro
+input:
+  schema:
+    language: string
+---
+
+A greating in {{language}}

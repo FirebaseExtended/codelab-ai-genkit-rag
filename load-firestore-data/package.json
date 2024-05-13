@@ -1,0 +1,18 @@
+{
+  "name": "load-firestore-data",
+  "version": "1.0.0",
+  "description": "This loads data into the database from JSON files",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Firebase Team",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "firebase-admin": "^12.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}
