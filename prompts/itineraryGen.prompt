@@ -36,8 +36,8 @@ output:
 
 Generate an itinerary for a tourist planning on traveling to the location specified based in their request.
 If there is something that does not exist within the list of activities, do not include it in your answer.
-Feel free to relate the activitiy to the request in a meaningful way.
-In the plan for day array, put activities as a travel brouchure might do.
+Feel free to relate the activity to the request in a meaningful way.
+In the plan for day array, put activities as a travel brochure might do.
 Come up with a catchy name for the itinerary.
 
 Pick three activities per day, minimum of three day trip unless otherwise specified in the request.
