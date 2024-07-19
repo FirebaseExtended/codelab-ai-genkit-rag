@@ -68,7 +68,7 @@ export default function LegacyResultsPage({
             tags={place.tags as unknown as Tag[]}
             onClick={() => {
               router.push(
-                `${LEGACY.ACTIVITIES}?${searchParamsToString()}&place=${place.ref}`,
+                `${LEGACY.ACTIVITIES}?${searchParamsToString}&place=${place.ref}`,
               );
             }}
           />
