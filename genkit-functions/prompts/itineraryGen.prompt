@@ -1,5 +1,5 @@
 ---
-model: vertexai/gemini-1.5-pro-preview
+model: vertexai/gemini-1.0-pro-preview
 config:
   temperature: 1.0
 input:
