@@ -79,7 +79,7 @@ export default function LegacyActivitiesPage({
       .join('&');
 
     router.push(
-      `${LEGACY.BOOK}?${searchParamsToString()}&${searchParamActivityIdString}`,
+      `${LEGACY.BOOK}?${searchParamsToString}&${searchParamActivityIdString}`,
     );
   };
 
