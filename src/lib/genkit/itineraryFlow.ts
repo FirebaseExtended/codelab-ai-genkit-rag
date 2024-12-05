@@ -14,12 +14,7 @@
  * limitations under the License.
  */
 
-import { retrieve } from '@genkit-ai/ai/retriever';
-import { prompt } from '@genkit-ai/dotprompt';
-import { defineFlow, run } from '@genkit-ai/flow';
-
 import {
-  Activity,
   Place,
   Destination,
   ItineraryFlowInput as ItineraryFlowInput,
@@ -29,44 +24,52 @@ import {
   getActivitiesForDestination,
   placesRetriever,
 } from './placesRetriever';
+import { ai } from './genkit.config';
 
-export interface ItineraryGeneratorPromptInput {
-  request: string;
-  place: string;
-  placeDescription: string;
-  activities: Activity[];
-}
+import { z } from 'zod';
+import { run } from 'genkit';
+
+export const ItineraryGeneratorPromptInput = ai.defineSchema(
+  'ItineraryGeneratorPromptInput',
+  z.object({
+    request: z.string(),
+    place: z.string(),
+    placeDescription: z.string(),
+    activities: z.array(
+      z.object({
+        name: z.string(),
+        description: z.string(),
+        imageUrl: z.string().optional(),
+      }),
+    ),
+  }),
+);
 
 const generateItinerary = async (request: string, place: Place) => {
   const activities = await getActivitiesForDestination(place.ref);
 
-  const itineraryGenerator =
-    await prompt<ItineraryGeneratorPromptInput>('itineraryGen');
-  const response = await itineraryGenerator.generate({
-    input: {
-      request: request,
-      place: place.name,
-      placeDescription: place.knownFor,
-      activities,
-    },
+  const itineraryGenerator = await ai.prompt<
+    typeof ItineraryGeneratorPromptInput,
+    typeof Destination,
+    z.ZodTypeAny
+  >('itineraryGen');
+  const response = await itineraryGenerator({
+    request,
+    place: place.name,
+    placeDescription: place.knownFor,
+    activities,
   });
 
-  const destination = response.output() as Destination;
+  const destination = response.data;
+  if (!destination) {
+    return null;
+  }
   destination.itineraryImageUrl = place.imageUrl;
   destination.placeRef = place.ref;
-  for (let i = 0; i < destination.itinerary.length; i++) {
-    const day = destination.itinerary[i];
-    for (let j = 0; j < day.planForDay.length; j++) {
-      const activityRef = day.planForDay[j].activityRef;
-      day.planForDay[j].imgUrl =
-        `https://storage.googleapis.com/tripedia-images/activities/${place.ref}_${activityRef}.jpg`;
-    }
-  }
   return destination;
 };
 
-// @ts-ignore
-export const itineraryFlow = defineFlow(
+export const itineraryFlow = ai.defineFlow(
   {
     name: 'itineraryFlow',
     inputSchema: ItineraryFlowInput,
@@ -74,22 +77,24 @@ export const itineraryFlow = defineFlow(
   },
 
   async (tripDetails) => {
-    const imgDescription = await run('imgDescription', async () => {
-      if (!tripDetails.imageUrls?.length) {
-        return '';
-      }
-      const imgDescription = await prompt('imgDescription');
-      const result = await imgDescription.generate({
-        input: { imageUrls: tripDetails.imageUrls },
-      });
-      return result.text();
-    });
+    const imgDescription = '';
+    // TODO: 2. Replace the line above with this:
+    // const imgDescription = await run('imgDescription', async () => {
+    //   if (!tripDetails.imageUrls?.length) {
+    //     return '';
+    //   }
+    //   const imgDescription = await ai.prompt('imgDescription');
+    //   const result = await imgDescription({
+    //     input: { imageUrls: tripDetails.imageUrls },
+    //   });
+    //   return result.text;
+    // });
 
     const places = await run(
       'Retrieve matching places',
       { imgDescription, request: tripDetails.request },
       async () => {
-        const docs = await retrieve({
+        const docs = await ai.retrieve({
           retriever: placesRetriever,
           query: `${tripDetails.request}\n${imgDescription}`,
           options: {
@@ -98,7 +103,16 @@ export const itineraryFlow = defineFlow(
         });
         return docs.map((doc) => {
           const data = doc.toJSON();
-          const place = data.metadata as Place;
+          const place: Place = {
+            continent: '',
+            country: '',
+            imageUrl: '',
+            knownFor: '',
+            name: '',
+            ref: '',
+            tags: [],
+            ...data.metadata,
+          };
           if (data.content[0].text) {
             place.knownFor = data.content[0].text;
           }
@@ -115,6 +129,6 @@ export const itineraryFlow = defineFlow(
         ),
       ),
     );
-    return itineraries;
+    return itineraries.filter((itinerary) => itinerary !== null);
   },
 );

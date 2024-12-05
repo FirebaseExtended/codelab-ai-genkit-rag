@@ -15,13 +15,13 @@
  */
 
 import { defineFirestoreRetriever } from '@genkit-ai/firebase';
-import { textEmbeddingGecko } from '@genkit-ai/vertexai';
+import { textEmbeddingGecko003 } from '@genkit-ai/vertexai';
 
 import { getApp, initializeApp } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 
 import { Activity } from './types';
-import { getProjectId } from './genkit.config';
+import { ai, getProjectId } from './genkit.config';
 
 function getOrInitApp() {
   try {
@@ -41,6 +41,9 @@ const firestore = getFirestore(app);
  * Returns activities linked with a known `placeId` using Firebase admin sdk for Firestore.
  */
 export const getActivitiesForDestination = async (placeId: string) => {
+  if (!placeId) {
+    return [];
+  }
   const docs = await firestore
     .collection('activities')
     .where('destination', '==', placeId)
@@ -56,12 +59,17 @@ export const getActivitiesForDestination = async (placeId: string) => {
 /**
  * Retriever for places based on the `knownFor` field using the Genkit retriever for Firestore.
  */
-export const placesRetriever = defineFirestoreRetriever({
-  name: 'placesRetriever',
-  firestore,
-  collection: 'places',
-  contentField: 'knownFor',
-  vectorField: 'embedding',
-  embedder: textEmbeddingGecko,
-  distanceMeasure: 'COSINE',
-});
+export const placesRetriever = ai.defineRetriever(
+  { name: 'placesRetriever' },
+  async () => ({ documents: [{ content: [{ text: 'TODO' }] }] }),
+);
+// TODO: 1. Replace the lines above with this:
+// export const placesRetriever = defineFirestoreRetriever(ai, {
+//   name: 'placesRetriever',
+//   firestore,
+//   collection: 'places',
+//   contentField: 'knownFor',
+//   vectorField: 'embedding',
+//   embedder: textEmbeddingGecko003,
+//   distanceMeasure: 'COSINE',
+// });

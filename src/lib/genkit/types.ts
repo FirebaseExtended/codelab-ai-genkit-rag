@@ -73,7 +73,7 @@ const Itinerary = z.object({
 
 export type Itinerary = z.infer<typeof Itinerary>;
 
-const Destination = z.object({
+export const Destination = z.object({
   itinerary: z.array(Itinerary),
   place: z.string(),
   itineraryName: z.string(),

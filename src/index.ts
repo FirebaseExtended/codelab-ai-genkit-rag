@@ -14,26 +14,4 @@
  * limitations under the License.
  */
 
-import { genkit } from 'genkit';
-import { enableFirebaseTelemetry } from '@genkit-ai/firebase';
-import { vertexAI } from '@genkit-ai/vertexai';
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  // ...
-  projectId: 'REPLACE_WITH_YOUR_PROJECT_ID',
-  // ...
-};
-
-export const getProjectId = () => firebaseConfig.projectId;
-
-enableFirebaseTelemetry({ projectId: getProjectId() });
-
-export const ai = genkit({
-  plugins: [
-    vertexAI({
-      projectId: getProjectId(),
-      location: 'us-central1',
-    }),
-  ],
-});
+import './lib/genkit/itineraryFlow';
