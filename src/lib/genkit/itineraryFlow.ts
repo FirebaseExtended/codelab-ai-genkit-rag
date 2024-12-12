@@ -77,18 +77,18 @@ export const itineraryFlow = ai.defineFlow(
   },
 
   async (tripDetails) => {
-    const imgDescription = '';
+    // const imgDescription = '';
     // TODO: 2. Replace the line above with this:
-    // const imgDescription = await run('imgDescription', async () => {
-    //   if (!tripDetails.imageUrls?.length) {
-    //     return '';
-    //   }
-    //   const imgDescription = await ai.prompt('imgDescription');
-    //   const result = await imgDescription({
-    //     input: { imageUrls: tripDetails.imageUrls },
-    //   });
-    //   return result.text;
-    // });
+    const imgDescription = await run('imgDescription', async () => {
+      if (!tripDetails.imageUrls?.length) {
+        return '';
+      }
+      const imgDescription = await ai.prompt('imgDescription');
+      const result = await imgDescription({
+        input: { imageUrls: tripDetails.imageUrls },
+      });
+      return result.text;
+    });
 
     const places = await run(
       'Retrieve matching places',
