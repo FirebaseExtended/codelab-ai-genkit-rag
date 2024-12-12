@@ -1,26 +1,23 @@
 {
   "name": "compass",
+  "main": "src/index.ts",
   "engines": {
     "node": "20"
   },
   "private": true,
   "scripts": {
     "start": "next start",
-    "compile": "tsc",
     "build": "next build && cp -r ./prompts ./.next/prompts",
-    "build:clean": "rm -rf ./lib",
-    "build:watch": "tsc --watch",
-    "dev": "next dev",
+    "build:clean": "rm -rf ./next",
+    "dev": "genkit start -- npx nodemon --ext prompt --watch prompts --exec next dev",
+    "dev:next": "next dev",
+    "dev:genkit": "genkit start -- npx nodemon --ext prompt --watch prompts --exec \"tsx --watch src/index.ts\"",
     "lint": "next lint"
   },
   "dependencies": {
-    "@genkit-ai/ai": "^0.5.7",
-    "@genkit-ai/core": "^0.5.7",
-    "@genkit-ai/dotprompt": "^0.5.7",
-    "@genkit-ai/firebase": "^0.5.7",
-    "@genkit-ai/flow": "^0.5.7",
-    "@genkit-ai/googleai": "^0.5.7",
-    "@genkit-ai/vertexai": "^0.5.7",
+    "genkit": "^0.9",
+    "@genkit-ai/firebase": "^0.9",
+    "@genkit-ai/vertexai": "^0.9",
     "clsx": "^2.1.1",
     "firebase-admin": "^12.2.0",
     "next": "14.2.10",

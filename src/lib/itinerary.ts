@@ -14,29 +14,28 @@
  * limitations under the License.
  */
 
-// @ts-nocheck
 'use server';
 
 import { UPLOAD_IMG_ENDPOINT } from './constants';
 
-import './genkit/genkit.config';
 import { ItineraryFlowOutput } from './genkit/types';
 import { itineraryFlow } from './genkit/itineraryFlow';
-
-import { runFlow } from '@genkit-ai/flow';
 
 export async function generateItinerary(
   previousState: null | undefined | ItineraryFlowOutput,
   formData: FormData,
 ): Promise<ItineraryFlowOutput | undefined> {
   const request = formData.get('request');
-  const images = []; // formData.getAll('images[]') as File[]; -- fix upload content-type
+  if (!request) {
+    throw new Error('No request provided');
+  }
 
+  const images: File[] = []; // formData.getAll('images[]') as File[]; -- fix upload content-type
   const imageUrls = await Promise.all(
     images.filter((i) => i.size > 0).map(uploadImageAndGetUrl),
   );
 
-  return await runFlow(itineraryFlow, {
+  return await itineraryFlow({
     request: request.toString(),
     imageUrls,
   });

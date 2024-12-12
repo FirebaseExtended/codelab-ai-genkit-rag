@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-import './lib/itineraryFlow';
+import './lib/genkit/itineraryFlow';
