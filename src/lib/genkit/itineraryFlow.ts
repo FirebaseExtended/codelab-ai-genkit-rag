@@ -26,8 +26,7 @@ import {
 } from './placesRetriever';
 import { ai } from './genkit.config';
 
-import { z } from 'zod';
-import { run } from 'genkit';
+import { run, z } from 'genkit';
 
 export const ItineraryGeneratorPromptInput = ai.defineSchema(
   'ItineraryGeneratorPromptInput',
@@ -60,7 +59,7 @@ const generateItinerary = async (request: string, place: Place) => {
     activities,
   });
 
-  const destination = response.data;
+  const destination = response.output;
   if (!destination) {
     return null;
   }
