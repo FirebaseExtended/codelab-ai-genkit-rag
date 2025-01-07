@@ -1,0 +1,38 @@
+---
+model: vertexai/gemini-1.5-flash
+input:
+  schema:
+    interests(array): string
+    place: string
+output:
+  schema:
+    emoji: string
+    title: string
+    description: string
+    days(array):
+      morning:
+        title: string
+        description: string
+      afternoon:
+        title: string
+        description: string
+      evening:
+        title: string
+        description: string
+---
+
+Generate an itinerary for a tourist planning on traveling to the location specified based in their request.
+Feel free to relate the activity to the request in a meaningful way.
+In the plan for day array, put activities as a travel brochure might do.
+Come up with a catchy name for the itinerary.
+
+Pick three activities per day, minimum of three day trip unless otherwise specified in the request.
+
+Pick a date after May 14, 2024 but before December 31, 2024
+
+Give each activity a unique title and description.
+
+Limit activity descriptions to 6 words.
+
+PLACE : {{place}}
+INTERESTS : {{interests}}

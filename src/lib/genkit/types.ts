@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import z from 'zod';
+import { z } from 'genkit';
 
 /**
  * Firestore data object for /places collection
