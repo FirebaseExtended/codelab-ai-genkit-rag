@@ -2,7 +2,7 @@
   "name": "compass",
   "main": "src/index.ts",
   "engines": {
-    "node": "20"
+    "node": "20 || 22"
   },
   "private": true,
   "scripts": {
