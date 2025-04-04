@@ -16,13 +16,13 @@ npm install
 Then run Genkit UI standalone sandbox:
 
 ```bash
-npm run start:genkit
+npm run dev:genkit
 ```
 
 Alternatively, run Genkit UI alongside the Next.js development server:
 
 ```bash
-npm run start
+npm run dev
 ```
 
 Open [http://localhost:4000](http://localhost:4000) with your browser to lauch Genkit UI.

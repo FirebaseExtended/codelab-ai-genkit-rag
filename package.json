@@ -6,7 +6,7 @@
   },
   "private": true,
   "scripts": {
-    "start": "next start",
+    "start": "npm run dev",
     "build": "next build && cp -r ./prompts ./.next/prompts",
     "build:clean": "rm -rf ./next",
     "dev": "genkit start -- npx nodemon --ext prompt --watch prompts --exec next dev",
