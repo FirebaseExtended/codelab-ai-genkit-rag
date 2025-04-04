@@ -15,7 +15,7 @@
  */
 
 import { defineFirestoreRetriever } from '@genkit-ai/firebase';
-import { textEmbeddingGecko003 } from '@genkit-ai/vertexai';
+import { textEmbedding004 } from '@genkit-ai/vertexai';
 
 import { getApp, initializeApp } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
@@ -70,6 +70,6 @@ export const placesRetriever = ai.defineRetriever(
 //   collection: 'places',
 //   contentField: 'knownFor',
 //   vectorField: 'embedding',
-//   embedder: textEmbeddingGecko003,
+//   embedder: textEmbedding004,
 //   distanceMeasure: 'COSINE',
 // });
