@@ -25,13 +25,10 @@ import { ai, getProjectId } from './genkit.config';
 
 function getOrInitApp() {
   try {
-    return initializeApp({
-      projectId: getProjectId(),
-    });
+    return getApp();
   } catch (error) {
-    console.error(error);
   }
-  return getApp();
+  return initializeApp({projectId: getProjectId()});
 }
 
 const app = getOrInitApp();

@@ -46,20 +46,19 @@ export default function TripCard({
       )}
       onClick={onClick}
     >
-      {/* Cover image */}
-      <Image
-        src={image}
-        alt={title}
-        width={300}
-        height={300}
-        className={clsx(
-          'w-full object-cover rounded-2xl bg-gray-200',
-          size === 'sm' ? 'h-56' : 'h-[608px]',
-        )}
-        placeholder="blur"
-        blurDataURL={image}
-        priority
-      />
+      {/* Cover image */
+        <Image
+          src={image || 'https://storage.googleapis.com/tripedia-images/destinations/banff-national-park.jpg'}
+          alt={title}
+          width={300}
+          height={300}
+          className={clsx(
+            'w-full object-cover rounded-2xl bg-gray-200',
+            size === 'sm' ? 'h-56' : 'h-[608px]',
+          )}
+          priority
+        />
+      }
 
       <div
         className={clsx(

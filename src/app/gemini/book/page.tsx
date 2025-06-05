@@ -47,16 +47,14 @@ export default function GeminiBookPage() {
         <>
           {/* Itinerary header */}
           <header className="relative h-72 w-full">
-            <Image
+            {destination.itineraryImageUrl && <Image
               src={destination.itineraryImageUrl}
               height={500}
               width={500}
               alt="Romantic Parisian Getaway"
               className="w-full h-72 object-cover [mask-image:linear-gradient(#000_25%,transparent_100%)] z-0 bg-gray-200"
-              placeholder="blur"
-              blurDataURL={destination.itineraryImageUrl}
               priority
-            />
+            />}
 
             <div className="flex flex-col gap-2 p-5 text-contrast-primary absolute bottom-0 z-10">
               <Stars />
@@ -65,10 +63,7 @@ export default function GeminiBookPage() {
                 {destination.itineraryName}
               </h1>
               <p className="text-lg">
-                {new Date(destination.startDate).toLocaleDateString('en-US', {
-                  month: 'long',
-                  day: 'numeric',
-                })}
+                {destination.startDate}
                 {' - '}
                 {destination.endDate}
               </p>

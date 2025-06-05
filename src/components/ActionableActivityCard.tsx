@@ -40,16 +40,15 @@ const ActionableActivityCard = memo(function ActionableActivityCard({
       className="relative flex gap-4 cursor-pointer animate-fade-in opacity-0"
       style={{ animationDelay: delay ? `${delay}ms` : '0s' }}
     >
-      {/* Activity photo */}
-      <Image
-        src={photo}
-        alt={name}
-        height={500}
-        width={500}
-        className="object-cover rounded-lg h-20 w-20 flex-shrink-0 bg-gray-200"
-        placeholder="blur"
-        blurDataURL={photo}
-      />
+      { /* Activity photo */
+        photo && <Image
+          src={photo}
+          alt={name}
+          height={500}
+          width={500}
+          className="object-cover rounded-lg h-20 w-20 flex-shrink-0 bg-gray-200"
+        />
+      }
 
       {/* Date/time and activity name */}
       <div className="w-full flex flex-col justify-between gap-2.5 pr-10">

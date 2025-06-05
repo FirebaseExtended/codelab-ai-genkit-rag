@@ -30,7 +30,7 @@ export default function LegacyResultsPage({
   searchParams: { [key: string]: string };
 }) {
   const { destination, checkIn, checkOut, guests } = searchParams;
-  const { toString: searchParamsToString } = useSearchParams();
+  const searchParamsInstance = useSearchParams();
   const router = useRouter();
 
   const totalGuests = guests ? parseInt(guests as string, 10) : 1;
@@ -68,7 +68,7 @@ export default function LegacyResultsPage({
             tags={place.tags as unknown as Tag[]}
             onClick={() => {
               router.push(
-                `${LEGACY.ACTIVITIES}?${searchParamsToString}&place=${place.ref}`,
+                `${LEGACY.ACTIVITIES}?${searchParamsInstance}&place=${place.ref}`,
               );
             }}
           />

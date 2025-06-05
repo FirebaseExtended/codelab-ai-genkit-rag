@@ -64,16 +64,14 @@ export default function LegacyBookPage({
       {destination && (
         <>
           <header className="relative h-72 w-full">
-            <Image
+            {destination.imageUrl && <Image
               src={destination.imageUrl}
               height={500}
               width={500}
               alt="Romantic Parisian Getaway"
               className="w-full h-72 object-cover [mask-image:linear-gradient(#000_25%,transparent_100%)] z-0 bg-gray-200"
-              placeholder="blur"
-              blurDataURL={destination.imageUrl}
               priority
-            />
+            />}
 
             <div className="flex flex-col gap-2 p-5 text-background absolute bottom-0 z-10">
               <h1 className="text-[32px] font-display font-medium leading-[1.1]">
@@ -127,7 +125,7 @@ export default function LegacyBookPage({
           </section>
 
           {/* Nonfunctional "Share Trip" button */}
-          <div className="fixed bottom-0 w-full px-5 py-6 flex justify-between items-center bg-black/10 backdrop-blur-xl border-t border-[#e9e9e9]/15 z-20">
+          <div className="absolute bottom-0 w-full px-5 py-6 flex justify-between items-center bg-black/10 backdrop-blur-xl border-t border-[#e9e9e9]/15 z-20">
             <button className="w-full py-3 rounded-xl text-lg text-center text-foreground font-medium bg-background">
               Share Trip
             </button>

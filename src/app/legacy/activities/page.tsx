@@ -43,7 +43,7 @@ export default function LegacyActivitiesPage({
   const { place } = searchParams;
   const router = useRouter();
   const [selected, setSelected] = useState<string[]>([]);
-  const { toString: searchParamsToString } = useSearchParams();
+  const searchParamsInstance = useSearchParams();
 
   const activities = activitiesJson.filter(
     (activity) => activity.destinationRef === place,
@@ -79,7 +79,7 @@ export default function LegacyActivitiesPage({
       .join('&');
 
     router.push(
-      `${LEGACY.BOOK}?${searchParamsToString}&${searchParamActivityIdString}`,
+      `${LEGACY.BOOK}?${searchParamsInstance}&${searchParamActivityIdString}`,
     );
   };
 

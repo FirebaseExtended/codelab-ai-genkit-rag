@@ -121,7 +121,7 @@ export default function LegacySearchPage() {
                   `${LEGACY.RESULTS}/?${new URLSearchParams({
                     destination: destination,
                     checkIn: dates[0]?.toISOString().split('T')[0],
-                    checkOut: dates[1]?.toISOString().split('T')[0],
+                    checkOut: dates[1]?.toISOString().split('T')[0] || dates[0]?.toISOString().split('T')[0],
                     guests: guests.toString(),
                   })}`,
                 )
