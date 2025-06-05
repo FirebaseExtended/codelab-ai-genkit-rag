@@ -17,8 +17,8 @@
 import {
   Place,
   Destination,
-  ItineraryFlowInput as ItineraryFlowInput,
-  ItineraryFlowOutput as ItineraryFlowOutput,
+  ItineraryFlowInput,
+  ItineraryFlowOutput,
 } from './types';
 import {
   getActivitiesForDestination,
@@ -26,7 +26,7 @@ import {
 } from './placesRetriever';
 import { ai } from './genkit.config';
 
-import { run, z } from 'genkit';
+import { z } from 'genkit';
 
 export const ItineraryGeneratorPromptInput = ai.defineSchema(
   'ItineraryGeneratorPromptInput',
@@ -78,7 +78,7 @@ export const itineraryFlow = ai.defineFlow(
   async (tripDetails) => {
     const imgDescription = '';
     // TODO: 2. Replace the line above with this:
-    // const imgDescription = await run('imgDescription', async () => {
+    // const imgDescription = await ai.run('imgDescription', async () => {
     //   if (!tripDetails.imageUrls?.length) {
     //     return '';
     //   }
@@ -89,7 +89,7 @@ export const itineraryFlow = ai.defineFlow(
     //   return result.text;
     // });
 
-    const places = await run(
+    const places = await ai.run(
       'Retrieve matching places',
       { imgDescription, request: tripDetails.request },
       async () => {
@@ -123,7 +123,7 @@ export const itineraryFlow = ai.defineFlow(
 
     const itineraries = await Promise.all(
       places.map((place, i) =>
-        run(`Generate itinerary #${i + 1}`, () =>
+        ai.run(`Generate itinerary #${i + 1}`, () =>
           generateItinerary(tripDetails.request, place),
         ),
       ),
