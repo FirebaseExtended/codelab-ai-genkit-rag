@@ -83,7 +83,7 @@ export default function GeminiBookPage() {
           </section>
 
           {/* Nonfunctional "Share Trip" button */}
-          <div className="fixed bottom-0 w-full px-5 py-6 flex justify-between items-center bg-surface border-t border-contrast-quaternary z-20">
+          <div className="absolute bottom-0 w-full px-5 py-6 flex justify-between items-center bg-surface border-t border-contrast-quaternary z-20">
             <button className="w-full py-3 rounded-xl text-lg text-center text-background font-medium bg-accent">
               Share Trip
             </button>

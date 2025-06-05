@@ -64,19 +64,20 @@ export default function AnimatedActivityCard({
               : 'h-1.5 w-1.5 border border-contrast-secondary rounded-full translate-x-1',
           )}
         >
-          {/* Activity photo */}
-          <Image
-            src={imgUrl}
-            alt={name}
-            height={100}
-            width={100}
-            className={clsx(
-              'object-cover rounded-lg flex-shrink-0 transition-all duration-[400ms] ease-in-out bg-gray-200',
-              activeIndex === index
-                ? 'w-20 h-20 opacity-100'
-                : 'w-0 h-0 opacity-0',
-            )}
-          />
+          { /* Activity photo */
+            imgUrl && <Image
+              src={imgUrl}
+              alt={name}
+              height={100}
+              width={100}
+              className={clsx(
+                'object-cover rounded-lg flex-shrink-0 transition-all duration-[400ms] ease-in-out bg-gray-200',
+                activeIndex === index
+                  ? 'w-20 h-20 opacity-100'
+                  : 'w-0 h-0 opacity-0',
+              )}
+            />
+          }
         </div>
         <span
           className={clsx(

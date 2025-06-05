@@ -40,7 +40,7 @@ export default function DayItinerary({ itinerary }: Props) {
           date={itinerary.date}
           name={activity.activityTitle}
           description={activity.activityDesc}
-          imgUrl={activity.imgUrl}
+          imgUrl={activity.imageUrl}
           index={index}
           activeIndex={activeActivityIndex}
           setActiveIndex={setActiveActivityIndex}

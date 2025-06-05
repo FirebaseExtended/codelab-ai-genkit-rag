@@ -24,10 +24,12 @@ output:
     itinerary(array):
       date: string
       day: number
+      imageUrl: string
       planForDay(array): 
         activityDesc: string
         activityRef: string
         activityTitle: string
+        imageUrl: string
     itineraryName: string
     place: string
     startDate: string

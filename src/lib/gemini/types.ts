@@ -20,15 +20,13 @@ export type Activity = {
   activityRef: string;
   activityTitle: string;
   activityDesc: string;
-  imgUrl: string;
+  imageUrl: string;
 };
 
 export type Itinerary = {
   day: number;
   date: string;
   planForDay: Activity[];
-  activityRef: string;
-  imgUrl: string;
 };
 
 export type Destination = {
