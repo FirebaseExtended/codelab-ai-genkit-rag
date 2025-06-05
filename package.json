@@ -19,7 +19,7 @@
     "@genkit-ai/vertexai": "^1.11.1",
     "clsx": "^2.1.1",
     "genkit": "^1.11.1",
-    "next": "14.2.21",
+    "next": "15.2.4",
     "react": "^18",
     "react-dom": "^18",
     "sass": "^1.77.8"
