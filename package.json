@@ -15,10 +15,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@genkit-ai/firebase": "^1.11.1",
-    "@genkit-ai/vertexai": "^1.11.1",
+    "@genkit-ai/firebase": "^1.12.0",
+    "@genkit-ai/vertexai": "^1.12.0",
     "clsx": "^2.1.1",
-    "genkit": "^1.11.1",
+    "genkit": "^1.12.0",
     "next": "^15.3.3",
     "react": "^18",
     "react-dom": "^18",

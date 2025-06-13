@@ -26,9 +26,8 @@ import { ai, getProjectId } from './genkit.config';
 function getOrInitApp() {
   try {
     return getApp();
-  } catch (error) {
-  }
-  return initializeApp({projectId: getProjectId()});
+  } catch (error) {}
+  return initializeApp({ projectId: getProjectId() });
 }
 
 const app = getOrInitApp();
@@ -67,6 +66,8 @@ export const placesRetriever = ai.defineRetriever(
 //   collection: 'places',
 //   contentField: 'knownFor',
 //   vectorField: 'embedding',
-//   embedder: vertexAI.embedder('text-embedding-005', {outputDimensionality: 768}),
+//   embedder: vertexAI.embedder('gemini-embedding-001', {
+//     outputDimensionality: 768,
+//   }),
 //   distanceMeasure: 'COSINE',
 // });
