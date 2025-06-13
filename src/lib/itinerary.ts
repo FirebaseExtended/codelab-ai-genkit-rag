@@ -16,8 +16,6 @@
 
 'use server';
 
-import { UPLOAD_IMG_ENDPOINT } from './constants';
-
 import { ItineraryFlowOutput } from './genkit/types';
 import { itineraryFlow } from './genkit/itineraryFlow';
 
@@ -30,9 +28,9 @@ export async function generateItinerary(
     throw new Error('No request provided');
   }
 
-  const images: File[] = []; // formData.getAll('images[]') as File[]; -- fix upload content-type
+  const images: File[] = formData.getAll('images[]') as File[]; // fix upload content-type
   const imageUrls = await Promise.all(
-    images.filter((i) => i.size > 0).map(uploadImageAndGetUrl),
+    images.filter((i) => i.size > 0).map(fileToDataURL),
   );
 
   return await itineraryFlow({
@@ -41,23 +39,22 @@ export async function generateItinerary(
   });
 }
 
-async function uploadImageAndGetUrl(image: File): Promise<string> {
-  const uploadRes = await fetch(UPLOAD_IMG_ENDPOINT);
-  const { uploadLocation, downloadLocation } = (await uploadRes.json()) || {};
+export async function fileToDataURL(file: File): Promise<string> {
+  // 1. Get the file's content as an ArrayBuffer
+  // The .arrayBuffer() method is available on the File object, even on the server.
+  const arrayBuffer = await file.arrayBuffer();
 
-  if (!uploadLocation || !downloadLocation) {
-    throw new Error('Failed to get upload and download locations');
-  }
+  // 2. Convert the ArrayBuffer to a Node.js Buffer
+  const buffer = Buffer.from(arrayBuffer);
 
-  const response = await fetch(uploadLocation, {
-    method: 'PUT',
-    body: image,
-    headers: { 'Content-Type': image.type },
-  });
+  // 3. Convert the Buffer to a Base64-encoded string
+  const base64 = buffer.toString('base64');
 
-  if (!response.ok) {
-    throw new Error(await response.text());
-  }
+  // 4. Get the MIME type from the File object
+  const mimeType = file.type;
 
-  return downloadLocation;
+  // 5. Construct the Data URL
+  const dataURL = `data:${mimeType};base64,${base64}`;
+
+  return dataURL;
 }

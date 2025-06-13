@@ -83,11 +83,22 @@ export const itineraryFlow = ai.defineFlow(
     //   if (!tripDetails.imageUrls?.length) {
     //     return '';
     //   }
-    //   const imgDescription = await ai.prompt('imgDescription');
-    //   const result = await imgDescription({
-    //     input: { imageUrls: tripDetails.imageUrls },
+    //   console.log('Generating image description...');
+    //   const images = tripDetails.imageUrls.map((url) => ({
+    //     media: { url },
+    //   }));
+    //   const response = await ai.generate({
+    //     model: 'vertexai/gemini-2.0-flash',
+    //     prompt: [
+    //       {
+    //         text: `Describe these image(s) in a detailed paragraph as though it was a tourist destination.
+    // Do not give the name of the location, only give a description of what you see in the image and what you think a tourist would like it described as in a dream vacation.`,
+    //       },
+    //       ...images,
+    //     ],
     //   });
-    //   return result.text;
+    //   console.log('Image description generated:', response.text);
+    //   return response.text;
     // });
 
     const places = await ai.run(
