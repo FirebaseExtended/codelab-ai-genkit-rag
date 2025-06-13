@@ -17,8 +17,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-import { useFormState } from 'react-dom';
+import { useEffect, useActionState } from 'react';
 
 import DreamingOverlay from '@/components/DreamingOverlay';
 import FormFields from '@/components/FormFields';
@@ -33,7 +32,7 @@ type generateItineraryArgs = Parameters<typeof generateItinerary>;
 
 export default function GeminiPromptPage() {
   const router = useRouter();
-  const [itinerary, formAction] = useFormState<
+  const [itinerary, formAction] = useActionState<
     generateItineraryArgs[0],
     generateItineraryArgs[1]
   >(generateItinerary, null);

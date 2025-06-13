@@ -23,13 +23,14 @@ import HomeButton from '@/components/HomeButton';
 import destinationsJson from '@/data/destinations.json';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useFormattedDates } from '@/lib/hooks/useFormattedDates';
+import React from 'react';
 
 export default function LegacyResultsPage({
   searchParams,
 }: {
-  searchParams: { [key: string]: string };
+  searchParams: Promise<{ [key: string]: string }>;
 }) {
-  const { destination, checkIn, checkOut, guests } = searchParams;
+  const { destination, checkIn, checkOut, guests } = React.use(searchParams);
   const searchParamsInstance = useSearchParams();
   const router = useRouter();
 

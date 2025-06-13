@@ -26,12 +26,14 @@ import destinationsJson from '@/data/destinations.json';
 import { useFormattedDates } from '@/lib/hooks/useFormattedDates';
 import { getActivitesByDay } from '@/lib/activities';
 import { Tag } from '@/lib/gemini/types';
+import React from 'react';
 
 export default function LegacyBookPage({
-  searchParams,
+  searchParams: searchParamsPromise,
 }: {
-  searchParams: Record<string, string | string[]>;
+  searchParams: Promise<Record<string, string | string[]>>;
 }) {
+  const searchParams = React.use(searchParamsPromise);
   const destination =
     searchParams &&
     destinationsJson.find(
@@ -64,14 +66,16 @@ export default function LegacyBookPage({
       {destination && (
         <>
           <header className="relative h-72 w-full">
-            {destination.imageUrl && <Image
-              src={destination.imageUrl}
-              height={500}
-              width={500}
-              alt="Romantic Parisian Getaway"
-              className="w-full h-72 object-cover [mask-image:linear-gradient(#000_25%,transparent_100%)] z-0 bg-gray-200"
-              priority
-            />}
+            {destination.imageUrl && (
+              <Image
+                src={destination.imageUrl}
+                height={500}
+                width={500}
+                alt="Romantic Parisian Getaway"
+                className="w-full h-72 object-cover [mask-image:linear-gradient(#000_25%,transparent_100%)] z-0 bg-gray-200"
+                priority
+              />
+            )}
 
             <div className="flex flex-col gap-2 p-5 text-background absolute bottom-0 z-10">
               <h1 className="text-[32px] font-display font-medium leading-[1.1]">

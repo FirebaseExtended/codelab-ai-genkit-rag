@@ -26,6 +26,7 @@ import ActionableActivityCard from '@/components/ActionableActivityCard';
 import BackButton from '@/components/BackButton';
 
 import activitiesJson from '@/data/activities.json';
+import React from 'react';
 
 type Activity = {
   activity_id: number;
@@ -38,9 +39,9 @@ type Activity = {
 export default function LegacyActivitiesPage({
   searchParams,
 }: {
-  searchParams: { [key: string]: string };
+  searchParams: Promise<{ [key: string]: string }>;
 }) {
-  const { place } = searchParams;
+  const { place } = React.use(searchParams);
   const router = useRouter();
   const [selected, setSelected] = useState<string[]>([]);
   const searchParamsInstance = useSearchParams();
