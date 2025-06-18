@@ -88,7 +88,7 @@ export const itineraryFlow = ai.defineFlow(
     //     media: { url },
     //   }));
     //   const response = await ai.generate({
-    //     model: 'vertexai/gemini-2.0-flash',
+    //     model: 'vertexai/gemini-2.5-flash',
     //     prompt: [
     //       {
     //         text: `Describe these image(s) in a detailed paragraph as though it was a tourist destination.
