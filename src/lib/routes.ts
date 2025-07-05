@@ -28,3 +28,5 @@ export const GEMINI = {
   RESULTS: '/gemini/results',
   BOOK: '/gemini/book',
 };
+
+export const ABOUT = '/about';

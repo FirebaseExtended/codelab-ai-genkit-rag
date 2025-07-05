@@ -17,7 +17,7 @@
 import Link from 'next/link';
 
 import TiltedCardsAnimation from '@/components/TiltedCardsAnimation';
-import { GEMINI, LEGACY } from '@/lib/routes';
+import { GEMINI, LEGACY, ABOUT } from '@/lib/routes';
 
 export default function Home() {
   return (
@@ -39,6 +39,13 @@ export default function Home() {
           className="w-full p-3 rounded-xl text-lg text-center font-medium gradient text-background animate-shadow"
         >
           Plan my dream trip with AI
+        </Link>
+
+        <Link
+          href={ABOUT}
+          className="text-foreground bg-gray-200 w-full p-3 rounded-xl text-lg text-center font-medium"
+        >
+          ABOUT THE APP
         </Link>
       </section>
     </main>
